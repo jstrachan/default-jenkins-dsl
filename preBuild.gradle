@@ -9,15 +9,17 @@ configurations {
 }
 
 dependencies {
-    libs 'io.fabric8:gitrepo-api:2.1.5'
+    libs 'io.fabric8:gitrepo-api:2.1.6'
     libs 'org.slf4j:slf4j-api:1.7.5'
     libs 'org.slf4j:slf4j-log4j12:1.7.5'
+    /*
     libs 'cglib:cglib-nodep:3.1'
     libs 'org.springframework:spring-aop:3.2.6.RELEASE'
     libs 'org.springframework:spring-beans:3.2.6.RELEASE'
     libs 'org.springframework:spring-context:3.2.6.RELEASE'
     libs 'org.springframework:spring-core:3.2.6.RELEASE'
     libs 'org.springframework:spring-expression:3.2.6.RELEASE'
+    */
 }
 
 task clean(type: Delete) {
@@ -30,5 +32,5 @@ task libs(type: Copy) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+    gradleVersion = '2.4-rc-2'
 }
