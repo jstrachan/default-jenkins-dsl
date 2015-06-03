@@ -9,17 +9,9 @@ configurations {
 }
 
 dependencies {
-    //libs 'io.fabric8:gitrepo-resteasy:2.2-SNAPSHOT'
-    libs 'io.fabric8:gitrepo-api:2.1.6'
+    libs 'io.fabric8:gitrepo-resteasy:2.1.7'
     libs 'org.slf4j:slf4j-api:1.7.5'
     libs 'org.slf4j:slf4j-log4j12:1.7.5'
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
 }
 
 task clean(type: Delete) {
