@@ -1,9 +1,8 @@
-import org.kohsuke.github.GitHub
+import io.fabric8.repo.git.GitRepoClient;
 
 // lets define the organsations and projects to include/exclude
-def githubOrganisations = ["fabric8io"]
 def excludedProjectNames = []
-def includedProjectNames = ["example-camel-cdi"]
+def includedProjectNames = []
 
 mavenJob('base-maven-build') {
   wrappers {
@@ -23,30 +22,32 @@ mavenJob('base-maven-build') {
   localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
 }
 
-githubOrganisations.each { orgName ->
-  def gh = GitHub.connectAnonymously()
-  gh.getOrganization(orgName).listRepositories().each { repo ->
-    def repoName = repo.name
+def client = new GitRepoClient('http://gogs.vagrant.local/', 'ceposta', 'RedHat$1')
+repos = client.listRepositories()
+repos.each { repo ->
+    def fullName = repo.getFullName()
+    def gitUrl = repo.getCloneUrl()
+    def repoName = fullName.substring(fullName.indexOf("/") + 1)
+
+    println "Found repo name: ${repoName}, full: ${fullName}, clone url: ${gitUrl}"
 
     if (!excludedProjectNames.contains(repoName) && (includedProjectNames.contains(repoName) || includedProjectNames.isEmpty())) {
-      def fullName = repo.getFullName()
-      def gitUrl = repo.gitTransportUrl
+        println "Adding repo ${repoName} to jenkins build"
 
-      println "Found build ${repoName} with class ${repo.class.name} full ${fullName} and url ${gitUrl}"
+        mavenJob(repoName) {
+            using('base-maven-build')
+            scm {
+                git(gitUrl) {
+                    branch('master')
+                    clean(true)
+                    createTag(false)
+                    cloneTimeout(30)
+                }
+            }
 
-      mavenJob(repo.name) {
-        using('base-maven-build')
-        scm {
-          github(fullName) {
-            branch('master')
-            clean(true)
-            createTag(false)
-            cloneTimeout(30)
-          }
+            goals('clean install')
         }
-
-        goals('clean install')
-      }
     }
-  }
 }
+
+

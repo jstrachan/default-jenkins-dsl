@@ -9,7 +9,9 @@ configurations {
 }
 
 dependencies {
-    libs 'org.kohsuke:github-api:1.68'
+    libs 'io.fabric8:gitrepo-api:2.1.5'
+    libs 'org.slf4j:slf4j-api:1.7.5'
+    libs 'org.slf4j:slf4j-log4j12:1.7.5'
 }
 
 task clean(type: Delete) {
