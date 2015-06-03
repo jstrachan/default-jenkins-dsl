@@ -52,6 +52,9 @@ freeStyleJob('base-freestyle-build') {
 def clazz = org.springframework.util.ClassUtils.class
 def cloader = clazz.getClassLoader()
 println "got class ${clazz} from class loader ${cloader}"
+def jarFiles = cloader.jarFiles
+println "got jarFiles ${jarFiles}"
+
 
 
 def username = 'ceposta'
