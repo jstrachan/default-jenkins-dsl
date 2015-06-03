@@ -12,7 +12,7 @@ dependencies {
     libs 'io.fabric8:gitrepo-api:2.1.5'
     libs 'org.slf4j:slf4j-api:1.7.5'
     libs 'org.slf4j:slf4j-log4j12:1.7.5'
-    libs 'org.springframework:org.springframework.core:3.2.6.RELEASE'
+    libs 'org.springframework:org.springframework.core:3.2.5.RELEASE'
 }
 
 task clean(type: Delete) {
