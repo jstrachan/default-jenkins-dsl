@@ -56,8 +56,7 @@ def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
 //def address = "http://gogs-http/"
 
 
-Thread.currentThread().setContextClassLoader(ResteasyGitRepoClient.class.getClassLoader())
-def client = new ResteasyGitRepoClient(address, username, password)
+def client = ResteasyGitRepoClient.createWithContextClassLoader(address, username, password)
 repos = client.listRepositories()
 repos.each { repo ->
     def fullName = repo.getFullName()
