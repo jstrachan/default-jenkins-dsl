@@ -29,7 +29,7 @@ def password = 'adminadmin'
 def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
 
 githubOrganisations.each { orgName ->
-  def gh = GitHubBuilder.withPassword(username, password).withEndpoint(address).build()
+  def gh = new GitHubBuilder().withPassword(username, password).withEndpoint(address).build()
   gh.getOrganization(orgName).listRepositories().each { repo ->
     def repoName = repo.name
 
