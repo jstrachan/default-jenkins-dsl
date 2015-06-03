@@ -1,5 +1,4 @@
-//import io.fabric8.repo.git.resteasy.ResteasyGitRepoClient;
-import io.fabric8.repo.git.GitRepoClient;
+import io.fabric8.repo.git.resteasy.ResteasyGitRepoClient;
 
 // lets define the organsations and projects to include/exclude
 def excludedProjectNames = []
@@ -57,10 +56,8 @@ def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
 //def address = "http://gogs-http/"
 
 
-Thread.currentThread().setContextClassLoader(GitRepoClient.class.getClassLoader())
-//Thread.currentThread().setContextClassLoader(ResteasyGitRepoClient.class.getClassLoader())
-//def client = new ResteasyGitRepoClient(address, username, password)
-def client = new GitRepoClient(address, username, password)
+Thread.currentThread().setContextClassLoader(ResteasyGitRepoClient.class.getClassLoader())
+def client = new ResteasyGitRepoClient(address, username, password)
 repos = client.listRepositories()
 repos.each { repo ->
     def fullName = repo.getFullName()
