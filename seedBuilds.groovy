@@ -51,8 +51,13 @@ freeStyleJob('base-freestyle-build') {
 // TODO these should come from env vars!!!
 def username = 'jenkins'
 def password = 'adminadmin'
+//def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
+// lets try DNS
+def address = "http://gogs-http/"
+
+
 Thread.currentThread().setContextClassLoader(ResteasyGitRepoClient.class.getClassLoader())
-def client = new ResteasyGitRepoClient("http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/", username, password)
+def client = new ResteasyGitRepoClient(address, username, password)
 repos = client.listRepositories()
 repos.each { repo ->
     def fullName = repo.getFullName()
