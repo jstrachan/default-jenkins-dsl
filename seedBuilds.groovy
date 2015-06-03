@@ -26,7 +26,7 @@ mavenJob('base-maven-build') {
 // TODO these should come from env vars!!!
 def username = 'jenkins'
 def password = 'adminadmin'
-def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
+def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/api/v1"
 
 githubOrganisations.each { orgName ->
   def gh = new GitHubBuilder().withPassword(username, password).withEndpoint(address).build()
