@@ -48,20 +48,10 @@ freeStyleJob('base-freestyle-build') {
     }
 }
 
-// lets try find the class loader for the spring stuff and where it comes from:
-def clazz = org.springframework.util.ClassUtils.class
-def cloader = clazz.getClassLoader()
-println "got class ${clazz} from class loader ${cloader}"
-def urls = cloader.getURLs().collect{ u -> u.toString()}.toList().sort()
-urls.each { url -> 
-   println "got URL: ${url}"
-}
-
-
-
-def username = 'ceposta'
-def password = 'RedHat$1'
-def client = new GitRepoClient('http://gogs.vagrant.local/', username, password)
+// TODO these should come from env vars!!!
+def username = 'jenkins'
+def password = 'adminadmin'
+def client = new GitRepoClient("http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"", username, password)
 repos = client.listRepositories()
 repos.each { repo ->
     def fullName = repo.getFullName()
