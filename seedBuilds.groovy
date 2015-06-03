@@ -1,4 +1,4 @@
-import org.kohsuke.github.GitHub
+import org.kohsuke.github.GitHubBuilder
 
 // lets define the organsations and projects to include/exclude
 def githubOrganisations = ["fabric8io"]
