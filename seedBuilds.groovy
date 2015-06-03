@@ -51,7 +51,7 @@ freeStyleJob('base-freestyle-build') {
 // TODO these should come from env vars!!!
 def username = 'jenkins'
 def password = 'adminadmin'
-def client = new GitRepoClient("http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"", username, password)
+def client = new GitRepoClient("http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/", username, password)
 repos = client.listRepositories()
 repos.each { repo ->
     def fullName = repo.getFullName()
