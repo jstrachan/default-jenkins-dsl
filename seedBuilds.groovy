@@ -23,8 +23,13 @@ mavenJob('base-maven-build') {
   localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
 }
 
+// TODO these should come from env vars!!!
+def username = 'jenkins'
+def password = 'adminadmin'
+def address = "http://${GOGS_HTTP_SERVICE_HOST}:${GOGS_HTTP_SERVICE_PORT}/"
+
 githubOrganisations.each { orgName ->
-  def gh = GitHub.connectAnonymously()
+  def gh = GitHubBuilder.withPassword(username, password).withEndpoint(address).build()
   gh.getOrganization(orgName).listRepositories().each { repo ->
     def repoName = repo.name
 
