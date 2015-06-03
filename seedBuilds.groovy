@@ -52,7 +52,7 @@ freeStyleJob('base-freestyle-build') {
 def clazz = org.springframework.util.ClassUtils.class
 def cloader = clazz.getClassLoader()
 println "got class ${clazz} from class loader ${cloader}"
-def urls = cloader.getURLs()
+def urls = cloader.getURLs().sort()
 urls.each { url -> 
    println "got URL: ${url}"
 }
