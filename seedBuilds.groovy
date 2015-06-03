@@ -48,6 +48,12 @@ freeStyleJob('base-freestyle-build') {
     }
 }
 
+// lets try find the class loader for the spring stuff and where it comes from:
+def clazz = org.springframework.util.ClassUtils.class
+def cloader = clazz.getClassLoader()
+println "got class ${clazz} from class loader ${cloader}"
+
+
 def username = 'ceposta'
 def password = 'RedHat$1'
 def client = new GitRepoClient('http://gogs.vagrant.local/', username, password)
